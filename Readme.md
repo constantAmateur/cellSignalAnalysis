@@ -43,8 +43,24 @@ The output consists of:
 
 ## Test run
 
-ipython -i -- ./cellSignalAnalysis.py \
-        -b ./bulkData/SangerProjectTARGET_ALL_phase1.txt \
-        -s ./scData/PBMCRef \
-        -w ./geneWeights.tsv \
-        ./output/TestRun
+Download the code and run the test.
+
+```
+git clone https://github.com/constantAmateur/cellSignalAnalysis.git
+cd cellSignalAnalysis
+mkdir output
+python ./cellSignalAnalysis.py -b ./bulkData/SangerProjectTARGET_ALL_phase1.txt -s ./scData/PBMCRef -w ./geneWeights.tsv ./output/TestRun
+```
+
+Load and visualise the results in R.
+
+```R
+source('cellSignalAnalysis.R')
+fit = normaliseExposures('./output/TestRun_fitExposures.tsv')
+pdf('output/TestRun_plot.pdf',width=10,height=7)
+hm = plotExposures(fit)
+draw(hm)
+dev.off()
+```
+
+
